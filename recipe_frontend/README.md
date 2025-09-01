@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Recipe Explorer Frontend (Next.js)
 
-## Getting Started
+A modern, clean, light-themed Next.js app to browse, search, and manage recipes. Uses the following brand colors:
+- Primary: #4CAF50
+- Secondary: #2196F3
+- Accent: #FF9800
 
-First, run the development server:
+Features:
+- Browse recipe list/grid
+- Search recipes (client-side filter)
+- View recipe details
+- User authentication (email/password login)
+- Recipe management (add, edit, delete) for authenticated users
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Quick Start
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1) Install dependencies
+   npm install
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+2) Configure environment
+   cp .env.example .env
+   # Set NEXT_PUBLIC_API_BASE_URL to your recipe_database API (e.g., http://localhost:8000)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3) Run dev server
+   npm run dev
+   # Open http://localhost:3000
 
-## Learn More
+## Backend API Contract
 
-To learn more about Next.js, take a look at the following resources:
+This app expects a backend (recipe_database) with these endpoints:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- GET /recipes
+  Returns: Recipe[]
+- GET /recipes/:id
+  Returns: Recipe
+- POST /recipes
+  Body: RecipeInput
+  Returns: Recipe
+- PUT /recipes/:id
+  Body: RecipeInput
+  Returns: Recipe
+- DELETE /recipes/:id
+  Returns: 204
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Auth:
+- POST /auth/login
+  Body: { email, password }
+  Returns: { token, user: { id, email } }
 
-## Deploy on Vercel
+Token is sent as Authorization: Bearer <token>.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Scripts
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- npm run dev    Start dev server
+- npm run build  Build production bundle
+- npm run start  Start production server
+- npm run lint   Lint
+
+## Notes
+
+- For simplicity, tokens are stored in localStorage. In production, prefer HTTP-only cookies managed by the backend.
+- Images from external URLs are allowed via next.config.ts remote patterns.

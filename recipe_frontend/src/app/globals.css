@@ -1,26 +1,60 @@
 @import "tailwindcss";
 
-:root {
-  --color-primary: #000000;
-  --color-secondary: #FFFFFF;
-  --color-accent: #3B82F6;
-  --color-background: #FFFFFF;
+@theme {
+  --color-primary: #4CAF50;
+  --color-secondary: #2196F3;
+  --color-accent: #FF9800;
+  --color-bg: #FFFFFF;
+  --color-text: #0F172A; /* slate-900 */
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
+* { box-sizing: border-box; }
 
-html,
-body {
+html, body {
   max-width: 100vw;
   overflow-x: hidden;
-  background-color: var(--color-background);
-  color: var(--color-primary);
+  background: var(--color-bg);
+  color: var(--color-text);
 }
 
 body {
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; }
+
+.container {
+  @apply mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+/* Utility classes for theme colors */
+.btn {
+  @apply inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
+}
+.btn-primary {
+  @apply bg-[var(--color-primary)] text-white hover:brightness-95 focus:ring-[var(--color-primary)];
+}
+.btn-secondary {
+  @apply bg-[var(--color-secondary)] text-white hover:brightness-95 focus:ring-[var(--color-secondary)];
+}
+.btn-accent {
+  @apply bg-[var(--color-accent)] text-white hover:brightness-95 focus:ring-[var(--color-accent)];
+}
+.input {
+  @apply block w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm shadow-sm placeholder:text-slate-400 focus:border-[var(--color-secondary)] focus:ring-[var(--color-secondary)];
+}
+.card {
+  @apply rounded-lg border border-slate-200 bg-white shadow-sm;
+}
+.card-hover {
+  @apply transition-shadow hover:shadow-md;
+}
+.badge {
+  @apply inline-flex items-center rounded-full bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-700;
+}
+
+/* Top nav shadow separation */
+.navbar {
+  @apply sticky top-0 z-40 w-full border-b border-slate-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60;
 }
